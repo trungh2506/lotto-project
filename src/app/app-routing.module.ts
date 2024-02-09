@@ -18,6 +18,7 @@ const routes: Routes = [
     path: 'lotto-tickets',
     component: LottoTicketsComponent,
   },
+  { path: '**', redirectTo: '', pathMatch: 'full' },
 ];
 
 @NgModule({
