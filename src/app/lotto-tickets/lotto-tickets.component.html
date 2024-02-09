@@ -1,0 +1,53 @@
+<p *ngIf="!this.selectedTicket" class="p-2 text-center text-2xl">
+  Chọn phiếu lô tô
+</p>
+
+<div
+  *ngIf="!this.selectedTicket"
+  class="flex flex-wrap items-center justify-center gap-2"
+>
+  <button
+    *ngFor="let ticket of this.tickets"
+    class="w-1/5 rounded border-2 border-black p-2 text-white"
+    type="submit"
+    (click)="onSelectedTicket(ticket.ticket_id)"
+    [ngStyle]="{ 'background-color': ticket.ticket_color }"
+  >
+    {{ ticket.ticket_name }}
+  </button>
+</div>
+
+<div *ngIf="ticket_data && ticket_data.length > 0">
+  <button
+    (click)="backToSelectTicket()"
+    class="absolute w-auto rounded border p-2 hover:bg-violet-600"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke-width="1.5"
+      stroke="currentColor"
+      class="h-6 w-6"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3"
+      />
+    </svg>
+  </button>
+  <p class="p-2 text-center text-3xl">Phiếu số {{ this.selectedTicket }}</p>
+  <div
+    class="flex items-center justify-center gap-4"
+    *ngFor="let array of ticket_data"
+  >
+    <div *ngFor="let number of array">
+      <button
+        class="m-1 rounded-full border-2 bg-amber-300 p-2 text-xs font-bold"
+      >
+        {{ number }}
+      </button>
+    </div>
+  </div>
+</div>
