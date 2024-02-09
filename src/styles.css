@@ -6,6 +6,7 @@ html {
     rgba(98, 58, 162, 1) 90%
   );
 }
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
