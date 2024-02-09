@@ -44,9 +44,9 @@
   >
     <div *ngFor="let number of array">
       <button
-        class="m-1 rounded-full border-2 bg-amber-300 p-2 text-xs font-bold"
+        class="m-1 rounded-full border-2 border-red-600 bg-amber-300 p-2 text-xs font-extrabold"
       >
-        {{ number }}
+        {{ number | number: "2.0-0" }}
       </button>
     </div>
   </div>
