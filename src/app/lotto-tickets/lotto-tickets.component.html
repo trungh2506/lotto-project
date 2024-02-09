@@ -3,6 +3,17 @@
 </p>
 
 <div
+  *ngIf="this.selectedTicket"
+  class="flex flex-col items-center justify-center text-white"
+>
+  <p>Số đã trúng:</p>
+  <div class="">
+    <span *ngFor="let number of winning_numbers">
+      {{ number | number: "2.0-0" }},
+    </span>
+  </div>
+</div>
+<div
   *ngIf="!this.selectedTicket"
   class="flex flex-wrap items-center justify-center gap-2"
 >
@@ -22,20 +33,7 @@
     (click)="backToSelectTicket()"
     class="absolute w-auto rounded border p-2 hover:bg-violet-600"
   >
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke-width="1.5"
-      stroke="currentColor"
-      class="h-6 w-6"
-    >
-      <path
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3"
-      />
-    </svg>
+    Quay lại
   </button>
   <p class="p-2 text-center text-3xl">Phiếu số {{ this.selectedTicket }}</p>
   <div
@@ -44,7 +42,9 @@
   >
     <div *ngFor="let number of array">
       <button
-        class="m-1 rounded-full border-2 border-red-600 bg-amber-300 p-2 text-xs font-extrabold"
+        [ngClass]="{ 'exist ': isInWinningNumbers(number) }"
+        (click)="addWinningNumber(number)"
+        class="shadow-black-500/50 m-1 rounded-full border-2 border-red-600 bg-amber-300 p-2 text-xs font-extrabold hover:shadow-xl"
       >
         {{ number | number: "2.0-0" }}
       </button>

@@ -8,7 +8,9 @@ import { HttpClient } from '@angular/common/http';
 })
 export class LottoTicketsComponent implements OnInit {
   selectedTicket!: any;
-  ticket_data!: any[][];
+  selectedNumber!: any;
+  ticket_data: any[][] = [];
+  winning_numbers: any[] = [];
   colors = [
     '#d5a6bd',
     '#dd7e6b',
@@ -32,16 +34,12 @@ export class LottoTicketsComponent implements OnInit {
   ngOnInit(): void {
     this.createTicketInfo();
   }
-  getColorTicket() {
-    const randomIndex = Math.floor(Math.random() * this.colors.length);
-    return this.colors[randomIndex];
-  }
   onSelectedTicket(value: any) {
     this.selectedTicket = value;
     this.readTicketData(value);
   }
   readTicketData(value: any) {
-    this.http
+    return this.http
       .get(`assets/loto-tickets-data/${value}.txt`, {
         responseType: 'text' as 'json',
       })
@@ -74,8 +72,64 @@ export class LottoTicketsComponent implements OnInit {
 
   backToSelectTicket() {
     if (confirm('Bạn có muốn đổi phiếu khác?')) {
-      this.selectedTicket = null;
-      this.ticket_data = [];
+      this.reset();
+    }
+  }
+
+  addWinningNumber(number: any) {
+    const index = this.winning_numbers.indexOf(number);
+    if (!this.winning_numbers) {
+      this.winning_numbers = [];
+    }
+    if (index !== -1) {
+      this.winning_numbers.splice(index, 1);
+    } else this.winning_numbers.push(number);
+    this.isVictory(number);
+  }
+
+  isInWinningNumbers(number: any) {
+    const index = this.winning_numbers.indexOf(number);
+    //nếu tồn tại
+    if (index !== -1) {
+      return true;
+    } else return false;
+  }
+
+  reset() {
+    this.selectedTicket = null;
+    this.ticket_data = [];
+    this.winning_numbers = [];
+  }
+  isVictory(number: any) {
+    let count_number = 0;
+    let row = -1;
+    let col = -1;
+
+    //Duyệt qua mảng 2 chiều để tìm vị trí
+    for (let i = 0; i < this.ticket_data.length; i++) {
+      for (let j = 0; j < this.ticket_data[i].length; j++) {
+        if (this.ticket_data[i][j] === number) {
+          row = i;
+          col = j;
+          break;
+        }
+      }
+      // Nếu đã tìm thấy giá trị thì dừng vòng lặp ngoài
+      if (row !== -1 && col !== -1) {
+        break;
+      }
+    }
+
+    // console.log(`Giá trị ${number} được tìm thấy tại vị trí (${row}, ${col})`);
+
+    //Duyệt để kiểm tra điều kiện thắng
+    for (let i = 0; i < this.ticket_data[row].length; i++) {
+      if (this.isInWinningNumbers(this.ticket_data[row][i])) {
+        count_number++;
+      }
+    }
+    if (count_number === 5) {
+      alert('Chúc mừng bạn đã KINH!');
     }
   }
 }
