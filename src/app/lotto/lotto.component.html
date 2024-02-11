@@ -1,1 +1,40 @@
-<p class="text-center">Chưa làm</p>
+<div class="flex flex-col items-center justify-center">
+  <button
+    (click)="randomInLottoNumbers()"
+    class="m-2 rounded-full bg-red-400 p-3 text-3xl text-white"
+  >
+    Rao lô tô
+  </button>
+  <p
+    class="rounded-full border-2 border-red-600 bg-amber-300 p-3 text-3xl text-red-600"
+  >
+    {{ randomNum | number: "2.0-0" }}
+  </p>
+
+  <div class="flex flex-row items-center justify-between">
+    <button
+      (click)="findNumber()"
+      class="rounded border-2 border-violet-600 bg-violet-600 p-2 hover:text-white"
+    >
+      Dò số
+    </button>
+    <table border="1" class="m-2 table-auto">
+      <tr class="" *ngFor="let row of this.numbers">
+        <ng-container *ngFor="let number of row">
+          <td
+            [ngClass]="{ exist: isInLottoNumbers(number) }"
+            class="border-2 border-black p-2 text-center text-lg text-black"
+          >
+            {{ number | number: "2.0-0" }}
+          </td>
+        </ng-container>
+      </tr>
+    </table>
+    <button
+      (click)="reset()"
+      class="rounded border-2 border-violet-600 bg-violet-600 p-2 hover:text-white"
+    >
+      Reset
+    </button>
+  </div>
+</div>
