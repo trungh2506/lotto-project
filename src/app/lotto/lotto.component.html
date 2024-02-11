@@ -1,23 +1,35 @@
+<button
+  (click)="findNumber()"
+  class="absolute left-0 w-auto rounded border-2 border-violet-600 bg-violet-600 p-2 hover:text-white"
+>
+  Dò số
+</button>
+<button
+  (click)="reset()"
+  class="absolute right-0 w-auto rounded border-2 border-violet-600 bg-violet-600 p-2 hover:text-white"
+>
+  Reset
+</button>
 <div class="flex flex-col items-center justify-center">
   <button
     (click)="randomInLottoNumbers()"
-    class="m-2 rounded-full bg-red-400 p-3 text-3xl text-white"
+    class="m-1 rounded-full bg-red-400 p-3 text-xl text-white"
   >
     Rao lô tô
   </button>
   <p
-    class="rounded-full border-2 border-red-600 bg-amber-300 p-3 text-3xl text-red-600"
+    class="absolute right-1/4 rounded-full border-2 border-red-600 bg-amber-300 p-3 text-3xl text-red-600"
+  >
+    {{ randomNum | number: "2.0-0" }}
+  </p>
+
+  <p
+    class="absolute left-1/4 rounded-full border-2 border-red-600 bg-amber-300 p-3 text-3xl text-red-600"
   >
     {{ randomNum | number: "2.0-0" }}
   </p>
 
   <div class="flex flex-row items-center justify-between">
-    <button
-      (click)="findNumber()"
-      class="absolute left-0 w-auto rounded border-2 border-violet-600 bg-violet-600 p-2 hover:text-white"
-    >
-      Dò số
-    </button>
     <table border="1" class="m-2 table-auto">
       <tr class="" *ngFor="let row of this.numbers">
         <ng-container *ngFor="let number of row">
@@ -30,11 +42,5 @@
         </ng-container>
       </tr>
     </table>
-    <button
-      (click)="reset()"
-      class="absolute right-0 w-auto rounded border-2 border-violet-600 bg-violet-600 p-2 hover:text-white"
-    >
-      Reset
-    </button>
   </div>
 </div>
