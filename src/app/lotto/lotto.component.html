@@ -18,17 +18,10 @@
     Rao lô tô
   </button>
   <p
-    class="absolute right-1/4 rounded-full border-2 border-red-600 bg-amber-300 p-3 text-3xl text-red-600"
+    class="rounded-full border-2 border-red-600 bg-amber-300 p-3 text-3xl text-red-600"
   >
     {{ randomNum | number: "2.0-0" }}
   </p>
-
-  <p
-    class="absolute left-1/4 rounded-full border-2 border-red-600 bg-amber-300 p-3 text-3xl text-red-600"
-  >
-    {{ randomNum | number: "2.0-0" }}
-  </p>
-
   <div class="flex flex-row items-center justify-between">
     <table border="1" class="m-2 table-auto">
       <tr class="" *ngFor="let row of this.numbers">
