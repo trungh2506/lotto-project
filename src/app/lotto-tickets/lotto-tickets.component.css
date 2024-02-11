@@ -1,3 +1,6 @@
 .exist {
-  opacity: 0.5;
+  opacity: 0.6;
+  text-decoration: underline;
+  border-color: rgb(0, 255, 0);
+  color: rgb(0, 255, 0);
 }

@@ -7,7 +7,7 @@
   class="flex flex-col items-center justify-center text-white"
 >
   <p>Số đã trúng:</p>
-  <div class="">
+  <div class="flex h-1/2 w-1/2 flex-wrap gap-1">
     <span *ngFor="let number of winning_numbers">
       {{ number | number: "2.0-0" }},
     </span>
@@ -31,10 +31,18 @@
 <div *ngIf="ticket_data && ticket_data.length > 0">
   <button
     (click)="backToSelectTicket()"
-    class="absolute w-auto rounded border p-2 hover:bg-violet-600"
+    class="absolute w-auto rounded border-2 border-violet-600 bg-violet-600 p-2 hover:text-white"
   >
     Quay lại
   </button>
+  <div *ngIf="this.selectedTicket">
+    <button
+      (click)="findNumber()"
+      class="absolute right-0 w-auto rounded border-2 border-violet-600 bg-violet-600 p-2 hover:text-white"
+    >
+      Dò số
+    </button>
+  </div>
   <p class="p-2 text-center text-3xl">Phiếu số {{ this.selectedTicket }}</p>
   <div
     class="flex items-center justify-center gap-4"
@@ -44,7 +52,7 @@
       <button
         [ngClass]="{ 'exist ': isInWinningNumbers(number) }"
         (click)="addWinningNumber(number)"
-        class="shadow-black-500/50 m-1 rounded-full border-2 border-red-600 bg-amber-300 p-2 text-xs font-extrabold hover:shadow-xl"
+        class="shadow-black-500/50 m-1 h-full rounded-full border-[3px] border-red-600 bg-amber-300 p-2 text-sm font-extrabold text-red-600 hover:shadow-xl"
       >
         {{ number | number: "2.0-0" }}
       </button>

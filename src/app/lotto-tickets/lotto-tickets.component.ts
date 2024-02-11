@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./lotto-tickets.component.css'],
 })
 export class LottoTicketsComponent implements OnInit {
+  numberInput: any = 0;
   selectedTicket!: any;
   selectedNumber!: any;
   ticket_data: any[][] = [];
@@ -130,6 +131,33 @@ export class LottoTicketsComponent implements OnInit {
     }
     if (count_number === 5) {
       alert('Chúc mừng bạn đã KINH!');
+    }
+  }
+
+  findNumber() {
+    this.numberInput = prompt('Nhập số cần dò trong phiếu');
+    let number = parseInt(this.numberInput);
+    let isFound = false;
+
+    if (!isNaN(number)) {
+      if (number < 0 || number > 90) {
+        alert('Nhập số lớn hơn 0 hoặc nhỏ hơn 90!');
+      } else {
+      }
+    } else {
+      alert('Vui lòng nhập một số hợp lệ!');
+    }
+
+    for (let array of this.ticket_data) {
+      for (let numberInArray of array) {
+        if (number === numberInArray) {
+          const index = this.winning_numbers.indexOf(number);
+          if (index === -1) {
+            this.winning_numbers.push(number);
+            isFound = true;
+          }
+        }
+      }
     }
   }
 }
