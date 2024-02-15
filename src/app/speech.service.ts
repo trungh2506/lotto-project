@@ -12,6 +12,7 @@ export class SpeechService {
       voice.voiceURI.includes('HoaiMy'),
     );
     const speech = new SpeechSynthesisUtterance(text);
+    speech.lang = 'vi-VN';
     if (vietnameseVoice) {
       speech.voice = vietnameseVoice;
       window.speechSynthesis.speak(speech);
