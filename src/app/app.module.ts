@@ -13,8 +13,8 @@ import { HomeComponent } from './home/home.component';
   declarations: [
     AppComponent,
     LottoTicketsComponent,
-    LottoComponent,
     HomeComponent,
+    LottoComponent,
   ],
   imports: [
     BrowserModule,

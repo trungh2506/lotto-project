@@ -7,10 +7,10 @@
   class="flex flex-col items-center justify-center text-white"
 >
   <p>Số đã trúng:</p>
-  <div class="flex h-1/2 w-1/2 flex-wrap gap-1">
-    <span *ngFor="let number of winning_numbers">
+  <div class="flex h-1/2 w-1/2 flex-row gap-1">
+    <p *ngFor="let number of winning_numbers">
       {{ number | number: "2.0-0" }},
-    </span>
+    </p>
   </div>
 </div>
 <div
@@ -43,13 +43,16 @@
       Dò số
     </button>
   </div>
-  <p class="p-2 text-center text-3xl">Phiếu số {{ this.selectedTicket }}</p>
-  <div
+  <p class="p-2 text-center text-2xl">Phiếu số {{ this.selectedTicket }}</p>
+
+  <!-- thông tin chi tiết phiếu -->
+  <!-- <div
     class="flex items-center justify-center gap-4"
     *ngFor="let array of ticket_data"
   >
     <div *ngFor="let number of array">
       <button
+        *ngIf="number != 0"
         [ngClass]="{ 'exist ': isInWinningNumbers(number) }"
         (click)="addWinningNumber(number)"
         class="shadow-black-500/50 m-1 h-full rounded-full border-[3px] border-red-600 bg-amber-300 p-2 text-sm font-extrabold text-red-600 hover:shadow-xl"
@@ -57,5 +60,28 @@
         {{ number | number: "2.0-0" }}
       </button>
     </div>
+  </div> -->
+
+  <div class="flex flex-row items-center justify-center">
+    <table border="1" class="m-2 table-auto">
+      <tr *ngFor="let array of this.ticket_data">
+        <ng-container *ngFor="let number of array">
+          <td
+            class="border-2 border-black bg-white p-2 text-center text-lg text-black"
+          >
+            <button
+              class="rounded-full hover:opacity-30"
+              *ngIf="number != 0"
+              [ngClass]="{
+                'exist ': isInWinningNumbers(number)
+              }"
+              (click)="addWinningNumber(number)"
+            >
+              {{ number | number: "2.0-0" }}
+            </button>
+          </td>
+        </ng-container>
+      </tr>
+    </table>
   </div>
 </div>

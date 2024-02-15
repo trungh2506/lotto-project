@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
+import { Router } from '@angular/router';
+import { SpeechService } from '../speech.service';
 
 @Component({
   selector: 'app-lotto',
@@ -14,7 +16,11 @@ export class LottoComponent {
   is_lotto_numbers: number[][] = []; // số đã quay
 
   randomNum: any = 0; //Số vừa quay
-  constructor() {}
+  constructor(
+    private router: Router,
+    private speechService: SpeechService,
+  ) {}
+
   ngOnInit(): void {
     this.numbers = this.generateNumbersArray();
     this.lotto_numbers = this.generateNumbersArray();
@@ -60,6 +66,7 @@ export class LottoComponent {
       'lotto_numbers',
       JSON.stringify(this.is_lotto_numbers),
     );
+    this.speakText(this.randomNum);
   }
 
   isInLottoNumbers(number: any) {
@@ -80,12 +87,13 @@ export class LottoComponent {
       }
     } else {
       alert('Vui lòng nhập một số hợp lệ!');
+      return;
     }
 
     if (this.isInLottoNumbers(number)) {
       alert(`Có số ${number}!`);
     } else {
-      alert(`Không tìm thấy!`);
+      alert(`Chưa có!`);
     }
   }
 
@@ -96,5 +104,9 @@ export class LottoComponent {
       this.randomNum = 0;
       localStorage.removeItem('lotto_numbers');
     }
+  }
+
+  speakText(number: string) {
+    this.speechService.speak(number);
   }
 }

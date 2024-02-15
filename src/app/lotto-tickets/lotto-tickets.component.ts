@@ -101,6 +101,7 @@ export class LottoTicketsComponent implements OnInit {
     this.ticket_data = [];
     this.winning_numbers = [];
   }
+
   isVictory(number: any) {
     let count_number = 0;
     let row = -1;
