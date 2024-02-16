@@ -10,18 +10,70 @@
 >
   Reset
 </button>
-<div class="flex flex-col items-center justify-center">
-  <button
-    (click)="randomInLottoNumbers()"
-    class="m-1 rounded-full bg-red-400 p-3 text-xl text-white"
-  >
-    Rao lô tô
-  </button>
-  <p
-    class="rounded-full border-4 border-red-600 bg-amber-300 p-3 text-3xl text-red-600"
-  >
-    {{ randomNum | number: "2.0-0" }}
-  </p>
+
+<div class="flex flex-col items-center">
+  <!-- button pause  -->
+  <div class="flex flex-row">
+    <button
+      *ngIf="!audio.src || this.is_lotto_numbers.length == 0"
+      [disabled]="this.is_lotto_numbers.length != 0"
+      (click)="randomInLottoNumbers()"
+      class="m-1 rounded-full bg-red-400 p-3 text-xl text-white hover:bg-red-500"
+    >
+      <!-- play -->
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="h-6 w-6"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.347a1.125 1.125 0 0 1 0 1.972l-11.54 6.347a1.125 1.125 0 0 1-1.667-.986V5.653Z"
+        />
+      </svg>
+    </button>
+
+    <button
+      *ngIf="!this.audio.paused"
+      [disabled]="!this.audio.src"
+      (click)="pauseLotto()"
+      class="m-1 rounded-full bg-red-400 p-3 text-xl text-white hover:bg-red-500"
+    >
+      <!-- stop -->
+      Dừng
+    </button>
+
+    <!-- resume  -->
+    <button
+      *ngIf="this.audio.paused"
+      [disabled]="!this.audio.src"
+      (click)="resumeLotto()"
+      class="m-1 rounded-full bg-red-400 p-3 text-xl text-white hover:bg-red-500"
+    >
+      <!-- stop -->
+      Tiếp tục
+    </button>
+  </div>
+  <div class="flex flex-row items-center">
+    <span
+      class="mr-5 rounded-full border-4 border-red-600 bg-amber-300 p-2 text-sm text-red-600 opacity-70"
+      >{{ this.previousNumber() | number: "2.0-0" }}</span
+    >
+    <span
+      class="rounded-full border-4 border-red-600 bg-amber-300 p-3 text-3xl text-red-600"
+    >
+      {{ displayNum | number: "2.0-0" }}
+    </span>
+
+    <span
+      class="ml-5 rounded-full border-4 border-red-600 bg-amber-300 p-2 text-sm text-red-600 opacity-70"
+      >...</span
+    >
+  </div>
 
   <div class="flex flex-row items-center justify-between">
     <table border="1" class="m-2 table-auto">
@@ -38,3 +90,7 @@
     </table>
   </div>
 </div>
+
+<audio *ngIf="audio">
+  <source [src]="audio.src" type="audio/webm" />
+</audio>
