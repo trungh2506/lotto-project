@@ -127,8 +127,8 @@ export class LottoComponent {
   // hô lô tô
   async voiceLotto(number: any): Promise<void> {
     return new Promise<void>((resolve, reject) => {
-      this.audio.src = `../../assets/lotto-audio/raoloto${number}.webm`;
-
+      // this.audio.src = `../../assets/lotto-audio/raoloto${number}.webm`;
+      this.audio.src = `https://github.com/trungh2506/lotto-project/raw/main/src/assets/lotto-audio/raoloto${number}.webm`;
       // Xác định độ dài của audio và sau đó phát âm thanh
       this.audio.onloadedmetadata = () => {
         this.audioDuration = this.audio.duration;
