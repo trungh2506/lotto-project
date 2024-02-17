@@ -21,20 +21,7 @@
       class="m-1 rounded-full bg-red-400 p-3 text-xl text-white hover:bg-red-500"
     >
       <!-- play -->
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke-width="1.5"
-        stroke="currentColor"
-        class="h-6 w-6"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.347a1.125 1.125 0 0 1 0 1.972l-11.54 6.347a1.125 1.125 0 0 1-1.667-.986V5.653Z"
-        />
-      </svg>
+      Hô!
     </button>
 
     <button
@@ -44,7 +31,7 @@
       class="m-1 rounded-full bg-red-400 p-3 text-xl text-white hover:bg-red-500"
     >
       <!-- stop -->
-      Dừng
+      ⏸ Dừng
     </button>
 
     <!-- resume  -->
@@ -55,7 +42,7 @@
       class="m-1 rounded-full bg-red-400 p-3 text-xl text-white hover:bg-red-500"
     >
       <!-- stop -->
-      Tiếp tục
+      ▶️ Tiếp tục
     </button>
   </div>
   <div class="flex flex-row items-center">
@@ -83,7 +70,9 @@
             [ngClass]="{ exist: isInLottoNumbers(number) }"
             class="border-2 border-black p-2 text-center text-lg text-black"
           >
-            {{ number | number: "2.0-0" }}
+            <div class="flex flex-col">
+              {{ number | number: "2.0-0" }}
+            </div>
           </td>
         </ng-container>
       </tr>
@@ -91,6 +80,6 @@
   </div>
 </div>
 
-<audio *ngIf="audio">
+<audio *ngIf="audio" autoplay>
   <source [src]="audio.src" type="audio/webm" />
 </audio>
